@@ -39,13 +39,13 @@
         }
 
         /* Table Styles to mimic the screenshot exactly */
-        table {
+        table.list-table {
             border-collapse: collapse;
             width: 100%;
             font-size: 11px; /* Small font size as per image */
         }
         
-        th {
+        table.list-table th {
             background-color: #f5f5f5; /* Light gray header */
             color: #000;
             font-weight: bold;
@@ -55,7 +55,7 @@
             white-space: nowrap; /* Keep headers on one line */
         }
 
-        td {
+        table.list-table td {
             padding: 4px 6px;
             border: 1px solid #a0a0a0;
             color: #333;
@@ -63,13 +63,13 @@
             white-space: nowrap; /* Keep data on one line mostly */
         }
 
-        /* Status Colors */
+        /* Status Colors - Added !important to force colors */
         .status-approved {
-            color: #008000; /* Green */
+            color: #008000 !important; /* Green */
             font-weight: bold;
         }
         .status-not-approved {
-            color: #FF0000; /* Red */
+            color: #FF0000 !important; /* Red */
             font-weight: bold;
         }
 
@@ -78,13 +78,78 @@
             color: #0000FF;
             text-decoration: none;
             font-weight: bold;
+            cursor: pointer;
         }
         .action-link:hover {
             text-decoration: underline;
         }
+
+        /* DETAILS VIEW STYLES */
+        .details-header-bar {
+            background-color: #4682B4; /* Steel Blue / similar to screenshot */
+            color: white;
+            font-weight: bold;
+            padding: 5px 10px;
+            font-size: 13px;
+            border-bottom: 1px solid #fff;
+        }
+
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            border: 1px solid #4682B4;
+        }
+        
+        .details-table td {
+            padding: 6px 10px;
+            vertical-align: top;
+            background-color: #fff;
+        }
+        
+        .details-label {
+            width: 200px;
+            color: #333;
+            font-weight: normal;
+        }
+        
+        .details-separator {
+            width: 10px;
+            text-align: center;
+        }
+
+        .text-red-custom {
+            color: #cc0000 !important;
+            font-weight: bold;
+        }
+        
+        .text-gray-custom {
+            color: #666;
+        }
+        
+        .text-green-custom {
+            color: #008000 !important;
+            font-weight: bold;
+        }
+
+        .btn-go-back {
+            background-color: #1a3c6e; /* Dark Blue */
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-go-back:hover {
+            background-color: #12294d;
+        }
     </style>
 </head>
-<body class="flex flex-col">
+<body class="flex flex-col min-h-screen">
 
     <!-- Header Section -->
     <header class="bg-white pt-2 pb-0">
@@ -142,217 +207,358 @@
 
     <!-- Main Content -->
     <main class="flex-grow p-4">
-        <!-- Page Title -->
-        <h2 class="text-center text-bits-blue text-2xl font-bold mb-6 mt-4">Leaves Status</h2>
+        
+        <!-- === LIST VIEW (DEFAULT) === -->
+        <div id="list-view" class="w-full">
+            <!-- Page Title -->
+            <h2 class="text-center text-bits-blue text-2xl font-bold mb-6 mt-4">Leaves Status</h2>
 
-        <!-- Table Container -->
-        <div class="w-full">
-            <table>
-                <thead>
+            <!-- Table Container -->
+            <div class="w-full">
+                <table class="list-table">
+                    <thead>
+                        <tr>
+                            <th class="w-12">Sr No.</th>
+                            <th>IDNO</th>
+                            <th>Name</th>
+                            <th>Hostel</th>
+                            <th>Room No.</th>
+                            <th>Departure Date</th>
+                            <th>Return Date</th>
+                            <th>Leave Reason</th>
+                            <th>Application Status</th>
+                            <th>Leaves Applied On</th>
+                            <th>Action</th>
+                            <th>Download Leave Approval</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Row 1 -->
+                        <tr>
+                            <td>1</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>07-Feb-2026</td>
+                            <td>09-Feb-2026</td>
+                            <td>going home</td>
+                            <td class="status-approved">Approved</td>
+                            <td>06-Feb-2026</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr>
+                            <td>2</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>22-Jan-2026</td>
+                            <td>26-Jan-2026</td>
+                            <td>going home as my health is not good</td>
+                            <td class="status-approved">Approved</td>
+                            <td>21-Jan-2026</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr>
+                            <td>3</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>16-Dec-2025</td>
+                            <td>04-Jan-2026</td>
+                            <td>sem break</td>
+                            <td class="status-approved">Approved</td>
+                            <td>15-Dec-2025</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                        <!-- Row 4 -->
+                        <tr>
+                            <td>4</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>22-Nov-2025</td>
+                            <td>23-Nov-2025</td>
+                            <td>going home</td>
+                            <td class="status-approved">Approved</td>
+                            <td>21-Nov-2025</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                        <!-- Row 5 -->
+                        <tr>
+                            <td>5</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>08-Nov-2025</td>
+                            <td>11-Nov-2025</td>
+                            <td>going home</td>
+                            <td class="status-approved">Approved</td>
+                            <td>07-Nov-2025</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                        <!-- Row 6 -->
+                        <tr>
+                            <td>6</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>25-Oct-2025</td>
+                            <td>26-Oct-2025</td>
+                            <td>Exam scheduled</td>
+                            <td class="status-approved">Approved</td>
+                            <td>25-Oct-2025</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                        <!-- Row 7 -->
+                        <tr>
+                            <td>7</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>15-Oct-2025</td>
+                            <td>23-Oct-2025</td>
+                            <td>going home for diwali</td>
+                            <td class="status-approved">Approved</td>
+                            <td>14-Oct-2025</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                        <!-- Row 8 -->
+                        <tr>
+                            <td>8</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>27-Sep-2025</td>
+                            <td>29-Sep-2025</td>
+                            <td>going home</td>
+                            <td class="status-approved">Approved</td>
+                            <td>26-Sep-2025</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                        <!-- Row 9 -->
+                        <tr>
+                            <td>9</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>20-Sep-2025</td>
+                            <td>21-Sep-2025</td>
+                            <td>going home as i am sick</td>
+                            <td class="status-approved">Approved</td>
+                            <td>19-Sep-2025</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                        <!-- Row 10 -->
+                        <tr>
+                            <td>10</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>20-Sep-2025</td>
+                            <td>21-Sep-2025</td>
+                            <td>go home as my health is not good</td>
+                            <td class="status-not-approved">Not Approved</td>
+                            <td>19-Sep-2025</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td></td>
+                        </tr>
+                        <!-- Row 11 -->
+                        <tr>
+                            <td>11</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>30-Aug-2025</td>
+                            <td>31-Aug-2025</td>
+                            <td>Going Home</td>
+                            <td class="status-approved">Approved</td>
+                            <td>29-Aug-2025</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                        <!-- Row 12 -->
+                        <tr>
+                            <td>12</td>
+                            <td>2021HS402450P</td>
+                            <td>PRIYANK KHANDELWAL</td>
+                            <td>RanaPratap Bhawan</td>
+                            <td>4116</td>
+                            <td>14-Aug-2025</td>
+                            <td>18-Aug-2025</td>
+                            <td>going home for festival</td>
+                            <td class="status-approved">Approved</td>
+                            <td>13-Aug-2025</td>
+                            <td><span class="action-link" onclick="showDetails()">View Details</span></td>
+                            <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- === DETAILS VIEW (HIDDEN INITIALLY) === -->
+        <div id="details-view" class="w-full hidden">
+            <!-- Title Section -->
+            <div class="flex flex-col items-center relative mb-4 mt-4">
+                <h2 class="text-bits-blue text-lg font-bold">Leaves Status</h2>
+                <div class="absolute right-0 top-0">
+                    <button onclick="showList()" class="btn-go-back">
+                        <span class="text-xl leading-none" style="margin-top: -2px;">&#8592;</span> GO BACK
+                    </button>
+                </div>
+            </div>
+
+            <!-- Details Container -->
+            <div class="w-full max-w-5xl mx-auto border border-blue-400">
+                
+                <!-- Student Details Section -->
+                <div class="details-header-bar">Student Details</div>
+                <table class="details-table border-none">
                     <tr>
-                        <th class="w-12">Sr No.</th>
-                        <th>IDNO</th>
-                        <th>Name</th>
-                        <th>Hostel</th>
-                        <th>Room No.</th>
-                        <th>Departure Date</th>
-                        <th>Return Date</th>
-                        <th>Leave Reason</th>
-                        <th>Application Status</th>
-                        <th>Leaves Applied On</th>
-                        <th>Action</th>
-                        <th>Download Leave Approval</th>
+                        <td class="details-label">IDNO</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-red-custom">2021HS402450P</td>
                     </tr>
-                </thead>
-                <tbody>
-                    <!-- Row 1 -->
                     <tr>
-                        <td>1</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>07-Feb-2026</td>
-                        <td>09-Feb-2026</td>
-                        <td>going home</td>
-                        <td class="status-approved">Approved</td>
-                        <td>06-Feb-2026</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">Name</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-red-custom">PRIYANK KHANDELWAL</td>
                     </tr>
-                    <!-- Row 2 -->
                     <tr>
-                        <td>2</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>22-Jan-2026</td>
-                        <td>26-Jan-2026</td>
-                        <td>going home as my health is not good</td>
-                        <td class="status-approved">Approved</td>
-                        <td>21-Jan-2026</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">BITS Email ID</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-gray-custom">h20212450@pilani.bits-pilani.ac.in</td>
                     </tr>
-                    <!-- Row 3 -->
                     <tr>
-                        <td>3</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>16-Dec-2025</td>
-                        <td>04-Jan-2026</td>
-                        <td>sem break</td>
-                        <td class="status-approved">Approved</td>
-                        <td>15-Dec-2025</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">Contact No.</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-gray-custom">8619739122</td>
                     </tr>
-                    <!-- Row 4 -->
+                </table>
+
+                <!-- Hostel Details Section -->
+                <div class="details-header-bar border-t border-white">Hostel Details</div>
+                <table class="details-table border-none">
                     <tr>
-                        <td>4</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>22-Nov-2025</td>
-                        <td>23-Nov-2025</td>
-                        <td>going home</td>
-                        <td class="status-approved">Approved</td>
-                        <td>21-Nov-2025</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">Hostel</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-red-custom">RanaPratap Bhawan</td>
                     </tr>
-                    <!-- Row 5 -->
                     <tr>
-                        <td>5</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>08-Nov-2025</td>
-                        <td>11-Nov-2025</td>
-                        <td>going home</td>
-                        <td class="status-approved">Approved</td>
-                        <td>07-Nov-2025</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">Room No.</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-red-custom">4116</td>
                     </tr>
-                    <!-- Row 6 -->
                     <tr>
-                        <td>6</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>25-Oct-2025</td>
-                        <td>26-Oct-2025</td>
-                        <td>Exam scheduled</td>
-                        <td class="status-approved">Approved</td>
-                        <td>25-Oct-2025</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">Warden Name</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-red-custom">Prof. Prateek</td>
                     </tr>
-                    <!-- Row 7 -->
                     <tr>
-                        <td>7</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>15-Oct-2025</td>
-                        <td>23-Oct-2025</td>
-                        <td>going home for diwali</td>
-                        <td class="status-approved">Approved</td>
-                        <td>14-Oct-2025</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">Warden Email Id</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-gray-custom">ranapratap.warden@pilani.bits-pilani.ac.in</td>
                     </tr>
-                    <!-- Row 8 -->
+                </table>
+
+                <!-- Leave Details Section -->
+                <div class="details-header-bar border-t border-white">Leave Details</div>
+                <table class="details-table border-none">
                     <tr>
-                        <td>8</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>27-Sep-2025</td>
-                        <td>29-Sep-2025</td>
-                        <td>going home</td>
-                        <td class="status-approved">Approved</td>
-                        <td>26-Sep-2025</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">Departure Date</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-red-custom">7-Feb-2026</td>
                     </tr>
-                    <!-- Row 9 -->
                     <tr>
-                        <td>9</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>20-Sep-2025</td>
-                        <td>21-Sep-2025</td>
-                        <td>going home as i am sick</td>
-                        <td class="status-approved">Approved</td>
-                        <td>19-Sep-2025</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">Return Date</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-red-custom">9-Feb-2026</td>
                     </tr>
-                    <!-- Row 10 -->
                     <tr>
-                        <td>10</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>20-Sep-2025</td>
-                        <td>21-Sep-2025</td>
-                        <td>go home as my health is not good</td>
-                        <td class="status-not-approved">Not Approved</td>
-                        <td>19-Sep-2025</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td class="details-label">Leave Reason</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-gray-custom">going home as my health is not good</td>
+                    </tr>
+                    <tr>
+                        <td class="details-label">Leaves Applied On</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-gray-custom">6-Feb-2026 07:58 PM</td>
+                    </tr>
+                    <tr>
+                        <td class="details-label">Supporting Document</td>
+                        <td class="details-separator">:</td>
+                        <td><a href="#" class="text-blue-600 font-bold hover:underline">View Supporting Document</a></td>
+                    </tr>
+                </table>
+
+                <!-- Approval Status Section -->
+                <div class="details-header-bar border-t border-white">Approval Status</div>
+                <table class="details-table border-none">
+                    <tr>
+                        <td class="details-label">Approval Status</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-green-custom">Approved</td>
+                    </tr>
+                    <tr>
+                        <td class="details-label">Approval Remarks</td>
+                        <td class="details-separator">:</td>
                         <td></td>
                     </tr>
-                    <!-- Row 11 -->
                     <tr>
-                        <td>11</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>30-Aug-2025</td>
-                        <td>31-Aug-2025</td>
-                        <td>Going Home</td>
-                        <td class="status-approved">Approved</td>
-                        <td>29-Aug-2025</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">Processed By</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-gray-custom">Prof. Prateek</td>
                     </tr>
-                    <!-- Row 12 -->
                     <tr>
-                        <td>12</td>
-                        <td>2021HS402450P</td>
-                        <td>PRIYANK KHANDELWAL</td>
-                        <td>RanaPratap Bhawan</td>
-                        <td>4116</td>
-                        <td>14-Aug-2025</td>
-                        <td>18-Aug-2025</td>
-                        <td>going home for festival</td>
-                        <td class="status-approved">Approved</td>
-                        <td>13-Aug-2025</td>
-                        <td><a href="#" class="action-link">View Details</a></td>
-                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                        <td class="details-label">Processed On</td>
+                        <td class="details-separator">:</td>
+                        <td class="text-gray-custom">6-Feb-2026 09:15 PM</td>
                     </tr>
-                </tbody>
-            </table>
+                </table>
+
+            </div>
         </div>
+
     </main>
     
     <script>
         const dateElement = document.getElementById('current-date');
-        // Static date to match requirements exactly
+        const listView = document.getElementById('list-view');
+        const detailsView = document.getElementById('details-view');
+
+        // Functions to switch views
+        function showDetails() {
+            listView.classList.add('hidden');
+            detailsView.classList.remove('hidden');
+            window.scrollTo(0, 0); // Scroll to top when switching
+        }
+
+        function showList() {
+            detailsView.classList.add('hidden');
+            listView.classList.remove('hidden');
+        }
     </script>
 </body>
 </html>
