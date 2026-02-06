@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Welfare Division (SWD) - BITS Pilani</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Font overrides to match the legacy look */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ffffff;
+        }
+        
+        /* Exact color matching */
+        .text-bits-blue {
+            color: #000080;
+        }
+        .bg-nav-gradient {
+            background: linear-gradient(to bottom, #f9f9f9 0%, #e9e9e9 100%);
+        }
+        .nav-item {
+            color: #000080;
+            font-weight: bold;
+            font-size: 13px;
+            padding: 8px 15px;
+            border-right: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .nav-item:hover {
+            background-color: #ddd;
+        }
+        .nav-item.active {
+            background-color: #e6e6e6; /* Simulating selected state if needed */
+        }
+
+        /* Table Styles to mimic the screenshot exactly */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 11px; /* Small font size as per image */
+        }
+        
+        th {
+            background-color: #f5f5f5; /* Light gray header */
+            color: #000;
+            font-weight: bold;
+            text-align: left;
+            padding: 4px 6px;
+            border: 1px solid #a0a0a0;
+        }
+
+        td {
+            padding: 4px 6px;
+            border: 1px solid #a0a0a0;
+            color: #333;
+            vertical-align: middle;
+        }
+
+        /* Status Colors */
+        .status-approved {
+            color: #008000; /* Green */
+            font-weight: bold;
+        }
+        .status-not-approved {
+            color: #FF0000; /* Red */
+            font-weight: bold;
+        }
+
+        /* Link Colors */
+        .action-link {
+            color: #0000FF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .action-link:hover {
+            text-decoration: underline;
+        }
+
+        /* The colored bar accent at the top/middle */
+        .rainbow-bar {
+            height: 4px;
+            width: 100%;
+            background: linear-gradient(to right, 
+                #ffd700 0%, #ffd700 60%, 
+                #87ceeb 60%, #87ceeb 80%, 
+                #ff0000 80%, #ff0000 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-white pt-2 pb-0">
+        <div class="container mx-auto px-4 flex justify-between items-center mb-2">
+            <!-- Logo Section -->
+            <div class="flex items-center gap-3">
+                <!-- Using Wikimedia URL for BITS logo -->
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/BITS_Pilani-Logo.svg/200px-BITS_Pilani-Logo.svg.png" 
+                     alt="BITS Pilani Logo" 
+                     class="h-20 w-auto object-contain">
+                
+                <div class="flex flex-col justify-center text-bits-blue">
+                    <div class="text-4xl font-bold leading-none" style="font-family: sans-serif;">BITS Pilani</div>
+                    <div class="text-lg leading-tight">Pilani Campus</div>
+                </div>
+            </div>
+
+            <!-- Header Text -->
+            <div class="text-bits-blue text-3xl font-bold tracking-tight">
+                Student Welfare Division (SWD)
+            </div>
+        </div>
+
+        <!-- Colored Accent Bar (Simulated) -->
+        <div class="flex w-full h-1 mt-4">
+             <!-- Looking at the image, the colorful bar is usually associated with the logo or footer, 
+                  but specifically here there's a blue line under the nav. 
+                  I'll add the rainbow strip here as an accent if it matches the general BITS style, 
+                  or stick to the clean gray nav bar shown. -->
+             <div class="w-2/3 bg-transparent"></div>
+             <div class="w-1/3 flex h-1.5">
+                 <div class="w-2/3 bg-yellow-400"></div>
+                 <div class="w-1/6 bg-blue-300"></div>
+                 <div class="w-1/6 bg-red-600"></div>
+             </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <div class="bg-nav-gradient border-t border-gray-300 border-b-4 border-blue-900 flex px-4 md:px-10">
+            <div class="nav-item">Apply For Leaves</div>
+            <div class="nav-item">Download Parent's Consent Form</div>
+            <div class="nav-item bg-[#efefef]">Leaves Status</div> <!-- Active tab simulated -->
+        </div>
+    </header>
+
+    <!-- Welcome & Info Bar -->
+    <div class="w-full bg-white border-b border-gray-300 py-1">
+        <div class="px-2 flex justify-between items-center text-bits-blue font-bold text-xs md:text-sm">
+            <div>
+                Welcome, PRIYANK KHANDELWAL
+            </div>
+            <div class="flex gap-2">
+                <span id="current-date">Friday, February 07, 2026</span>
+                <span>|</span>
+                <a href="#" class="text-blue-700 hover:underline">[Logout]</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow p-4">
+        <!-- Page Title -->
+        <h2 class="text-center text-bits-blue text-xl font-bold mb-4">Leaves Status</h2>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr No.</th>
+                        <th>IDNO</th>
+                        <th>Name</th>
+                        <th>Hostel</th>
+                        <th>Room No.</th>
+                        <th style="min-width: 80px;">Departure Date</th>
+                        <th style="min-width: 80px;">Return Date</th>
+                        <th>Leave Reason</th>
+                        <th>Application Status</th>
+                        <th>Leaves Applied On</th>
+                        <th>Action</th>
+                        <th>Download Leave Approval</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Row 1 -->
+                    <tr>
+                        <td>1</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>07-Feb-2026</td>
+                        <td>09-Feb-2026</td>
+                        <td>going home</td>
+                        <td class="status-approved">Approved</td>
+                        <td>06-Feb-2026</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                    <!-- Row 2 -->
+                    <tr>
+                        <td>2</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>22-Jan-2026</td>
+                        <td>26-Jan-2026</td>
+                        <td>going home as my health is not good</td>
+                        <td class="status-approved">Approved</td>
+                        <td>21-Jan-2026</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                    <!-- Row 3 -->
+                    <tr>
+                        <td>3</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>16-Dec-2025</td>
+                        <td>04-Jan-2026</td>
+                        <td>sem break</td>
+                        <td class="status-approved">Approved</td>
+                        <td>15-Dec-2025</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                    <!-- Row 4 -->
+                    <tr>
+                        <td>4</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>22-Nov-2025</td>
+                        <td>23-Nov-2025</td>
+                        <td>going home</td>
+                        <td class="status-approved">Approved</td>
+                        <td>21-Nov-2025</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                    <!-- Row 5 -->
+                    <tr>
+                        <td>5</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>08-Nov-2025</td>
+                        <td>11-Nov-2025</td>
+                        <td>going home</td>
+                        <td class="status-approved">Approved</td>
+                        <td>07-Nov-2025</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                    <!-- Row 6 -->
+                    <tr>
+                        <td>6</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>25-Oct-2025</td>
+                        <td>26-Oct-2025</td>
+                        <td>Exam scheduled</td>
+                        <td class="status-approved">Approved</td>
+                        <td>25-Oct-2025</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                    <!-- Row 7 -->
+                    <tr>
+                        <td>7</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>15-Oct-2025</td>
+                        <td>23-Oct-2025</td>
+                        <td>going home for diwali</td>
+                        <td class="status-approved">Approved</td>
+                        <td>14-Oct-2025</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                    <!-- Row 8 -->
+                    <tr>
+                        <td>8</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>27-Sep-2025</td>
+                        <td>29-Sep-2025</td>
+                        <td>going home</td>
+                        <td class="status-approved">Approved</td>
+                        <td>26-Sep-2025</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                    <!-- Row 9 -->
+                    <tr>
+                        <td>9</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>20-Sep-2025</td>
+                        <td>21-Sep-2025</td>
+                        <td>going home as i am sick</td>
+                        <td class="status-approved">Approved</td>
+                        <td>19-Sep-2025</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                    <!-- Row 10 -->
+                    <tr>
+                        <td>10</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>20-Sep-2025</td>
+                        <td>21-Sep-2025</td>
+                        <td>go home as my health is not good</td>
+                        <td class="status-not-approved">Not Approved</td>
+                        <td>19-Sep-2025</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td></td>
+                    </tr>
+                    <!-- Row 11 -->
+                    <tr>
+                        <td>11</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>30-Aug-2025</td>
+                        <td>31-Aug-2025</td>
+                        <td>Going Home</td>
+                        <td class="status-approved">Approved</td>
+                        <td>29-Aug-2025</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                    <!-- Row 12 -->
+                    <tr>
+                        <td>12</td>
+                        <td>2021HS402450P</td>
+                        <td>PRIYANK KHANDELWAL</td>
+                        <td>RanaPratap Bhawan</td>
+                        <td>4116</td>
+                        <td>14-Aug-2025</td>
+                        <td>18-Aug-2025</td>
+                        <td>going home for festival</td>
+                        <td class="status-approved">Approved</td>
+                        <td>13-Aug-2025</td>
+                        <td><a href="#" class="action-link">View Details</a></td>
+                        <td><a href="#" class="action-link">Download Leave Approval</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    
+    <!-- Script to ensure date matches prompt or is dynamic if preferred, 
+         but we keep it static to match the 'exactly this' request in the HTML content above. 
+         However, let's add a script that formatted the date just in case. -->
+    <script>
+        // Optional: Update to real current date if desired, but user asked for "Exactly this" 
+        // so we leave the static text in the HTML primarily.
+        
+        // This makes sure the date is formatted like the screenshot
+        const dateElement = document.getElementById('current-date');
+        // Uncomment below to use real-time date
+        /*
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: '2-digit' };
+        const today = new Date();
+        dateElement.innerText = today.toLocaleDateString('en-US', options); 
+        */
+    </script>
+</body>
+</html>
